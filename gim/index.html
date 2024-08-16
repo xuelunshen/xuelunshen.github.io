@@ -192,6 +192,7 @@
         }
 
         .model-container {
+            position: relative;
             width: 100%; /* 或者您可以使用具体的像素值，例如 600px */
             margin: 0 auto; /* 这会使得容器在其父容器中居中 */
             display: flex;
@@ -358,6 +359,19 @@
             align-items: center; /* 垂直居中 */
         }
 
+        .load-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Black background with 50% opacity */
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+
     </style>
 </head>
 
@@ -490,14 +504,14 @@
                             </a>
                         </span>
                         <span class="link-block">
-                            <a href=""
+                            <a href="https://zhuanlan.zhihu.com/p/711361901"
                                 class="external-link button is-normal is-rounded is-dark"
                                 target="_blank"
                                 rel="noopener noreferrer">
-                                <span class="icon">
-                                <i class="fas fa-poll"></i>
-                                </span>
-                                <span>ZEB Benchmark</span>
+                            <span class="icon">
+                                <i class="fas fa-scroll"></i>
+                            </span>
+                            <span>Zhihu</span>
                             </a>
                         </span>
                     </div>
@@ -554,45 +568,16 @@
                     based on any image matching architecture using internet videos, an
                     abundant and diverse data source.
 
-                    Given an architecture, GIM first trains it on standard
-                    domain-specific datasets and then combines it with
-                    complementary matching methods to create dense labels on nearby
-                    frames of novel videos.
-
-                    These labels are filtered by robust fitting, and then enhanced by
-                    propagating them to distant frames.
-
-                    The final model is trained on propagated data with strong
-                    augmentations.
-
                     Not relying on complex 3D reconstruction makes GIM much more
                     efficient and less likely to fail than standard
                     SfM-and-MVS based frameworks.
-                </p>
-                <p>
-                    We also propose ZEB, the first zero-shot evaluation benchmark for
-                    image matching.
-
-                    By mixing data from diverse domains, ZEB can thoroughly assess the
-                    cross-domain generalization performance
-                    of different methods.
                 </p>
                 <p>
                     Experiments demonstrate the effectiveness and generality of GIM.
 
                     Applying GIM consistently improves the zero-shot performance of 3
                     state-of-the-art image matching
-                    architectures as the number of downloaded videos increases; with 50
-                    hours of YouTube videos, the relative
-                    zero-shot performance improves by 8.4% − 18.1%.
-
-                    GIM also enables generalization to extreme cross-domain data such as
-                    Bird Eye View (BEV) images of projected
-                    3D point clouds.
-
-                    More importantly, our single zero-shot model consistently
-                    outperforms domain-specific baselines when
-                    evaluated on downstream tasks inherent to their respective domains.
+                    architectures as the number of downloaded videos increases.
                 </p>
             </div>
         </div>
@@ -606,7 +591,7 @@
         Two-view Matching
         <span style="font-size: smaller; color: gray;">(no RANSAC)</span>
         and Reconstruction
-      </h2>      
+    </h2>      
     <div class="row">
 
         <div class="col-lg-2 col-md-4 col-sm-12 d-flex justify-content-center align-items-center">
@@ -877,19 +862,18 @@
     <div class="container">
         <div class="model-container" style="display: flex; flex-direction: column; align-items: center;">
             <div class="pcd-title" style="text-align: center;"><b>COLMAP (SIFT)</b></div>
-            <!-- <model-viewer src="https://media.githubusercontent.com/media/xuelunshen/gim/main/assets/demo/COLMAP.glb" style="width: 95%; height: 400px; border: solid; border-color: #282828; border-width: 2px;" shadow-intensity="0" camera-controls touch-action="pan-y"></model-viewer> -->
-            <model-viewer src="https://xuelunshen.s3.ap-northeast-1.amazonaws.com/COLMAP.glb" style="width: 95%; height: 400px; border: solid; border-color: #282828; border-width: 2px;" shadow-intensity="0" camera-controls touch-action="pan-y"></model-viewer>
-            <!-- <model-viewer src="static/videos/COLMAP.glb" style="width: 95%; height: 400px; border: solid; border-color: #282828; border-width: 2px;" shadow-intensity="0" camera-controls touch-action="pan-y"></model-viewer> -->
+            <button class="load-button" onclick="loadModel(this, 'https://xuelunshen.s3.ap-northeast-1.amazonaws.com/COLMAP.glb')">Load 3D Model</button>
+            <model-viewer style="width: 95%; height: 400px; border: solid; border-color: #282828; border-width: 2px;" shadow-intensity="0" camera-controls touch-action="pan-y"></model-viewer>
         </div>
         <div class="model-container" style="display: flex; flex-direction: column; align-items: center;">
             <div class="pcd-title" style="text-align: center;"><b>COLMAP + DKM</b></div>
-            <model-viewer src="static/videos/DKM.glb" style="width: 95%; height: 400px; border: solid; border-color: #282828; border-width: 2px;" shadow-intensity="0" camera-controls touch-action="pan-y"></model-viewer>
+            <button class="load-button" onclick="loadModel(this, 'static/videos/DKM.glb')">Load 3D Model</button>
+            <model-viewer style="width: 95%; height: 400px; border: solid; border-color: #282828; border-width: 2px;" shadow-intensity="0" camera-controls touch-action="pan-y"></model-viewer>
         </div>
         <div class="model-container" style="display: flex; flex-direction: column; align-items: center;">
             <div class="pcd-title" style="text-align: center;"><b>COLMAP + GIM<sub>DKM</sub></b></div>
-            <!-- <model-viewer src="https://media.githubusercontent.com/media/xuelunshen/gim/main/assets/demo/GIM.glb" style="width: 95%; height: 400px; border: solid; border-color: #282828; border-width: 2px;" shadow-intensity="0" camera-controls touch-action="pan-y"></model-viewer> -->
-            <model-viewer src="https://xuelunshen.s3.ap-northeast-1.amazonaws.com/GIM.glb" style="width: 95%; height: 400px; border: solid; border-color: #282828; border-width: 2px;" shadow-intensity="0" camera-controls touch-action="pan-y"></model-viewer>
-            <!-- <model-viewer src="static/videos/GIM.glb" style="width: 95%; height: 400px; border: solid; border-color: #282828; border-width: 2px;" shadow-intensity="0" camera-controls touch-action="pan-y"></model-viewer> -->
+            <button class="load-button" onclick="loadModel(this, 'https://xuelunshen.s3.ap-northeast-1.amazonaws.com/GIM.glb')">Load 3D Model</button>
+            <model-viewer style="width: 95%; height: 400px; border: solid; border-color: #282828; border-width: 2px;" shadow-intensity="0" camera-controls touch-action="pan-y"></model-viewer>
         </div>
     </div>
 
@@ -1061,6 +1045,65 @@
 
 </div>
 
+<br/>
+<div class="container-fluid">
+    <h2 class="title is-3" style="text-align: center;">
+        Emergent Ability
+    </h2>
+    <h5 class="title is-5" style="text-align: center; color: gray;">
+        We also conducted matching on images that we had never encountered in training, 
+        and even though their styles and modalities are completely different from the training data, 
+        the zero-shot generalization ability of GIM can still handle them.
+    </h5>
+
+    <div class="row">
+        <!-- <p class="image-title">BEV Images Matching</p> -->
+        <div class="col-lg-4 col-md-4 col-sm-12 d-flex flex-column justify-content-center align-items-center image-block">
+            <p class="image-title text-center">BEV images</p>
+            <img src="static/images/bev.png" alt="A pair of BEV images">
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 d-flex flex-column justify-content-center align-items-center image-block">
+            <p class="image-title text-center">Match result</p>
+            <img src="static/images/bev-match.png" alt="Match result">
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 d-flex flex-column justify-content-center align-items-center image-block">
+            <p class="image-title text-center">Warp result</p>
+            <img src="static/images/bev-warp.jpg" alt="Warp result">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12 d-flex flex-column justify-content-center align-items-center image-block">
+            <p class="image-title text-center">Remote sensing and BEV images</p>
+            <img src="static/images/rs-bev.jpg" alt="A pair of remote sensing and LiDAR BEV images">
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 d-flex flex-column justify-content-center align-items-center image-block">
+            <p class="image-title text-center">Match result</p>
+            <img src="static/images/rs-bev-match.png" alt="Match result">
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 d-flex flex-column justify-content-center align-items-center image-block">
+            <p class="image-title text-center">Warp result</p>
+            <img src="static/images/rs-bev-warp.png" alt="Warp result">
+        </div>
+    </div>
+
+        <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12 d-flex flex-column justify-content-center align-items-center image-block">
+            <p class="image-title text-center">Remote sensing and aerial images</p>
+            <img src="static/images/rs-aerial.png" alt="A pair of remote sensing and aerial images">
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 d-flex flex-column justify-content-center align-items-center image-block">
+            <p class="image-title text-center">Match result</p>
+            <img src="static/images/rs-aerial-match.png" alt="Match result">
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 d-flex flex-column justify-content-center align-items-center image-block">
+            <p class="image-title text-center">Warp result</p>
+            <img src="static/images/rs-aerial-warp.png" alt="Warp result">
+        </div>
+    </div>
+
+</div>
+
 <div class="containerx">
     <div class="content">
         <button onclick="copyToClipboard()" class="button">Copy Citation</button>
@@ -1079,6 +1122,11 @@ year={2024}
 </div>
 
 <script>
+    function loadModel(button, modelUrl) {
+        var modelViewer = button.nextElementSibling;
+        modelViewer.src = modelUrl;
+        button.style.display = 'none'; // Optionally hide the button after loading the model
+    }
     // 使用forEach来为每个slider添加事件监听器
     document.querySelectorAll('.slider').forEach(function (slider) {
         var container = slider.parentNode;
